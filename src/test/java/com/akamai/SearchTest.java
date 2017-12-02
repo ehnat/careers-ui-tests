@@ -2,13 +2,13 @@ package com.akamai;
 
 import org.testng.annotations.Test;
 
+import static com.akamai.configuration.Configuration.CONFIGURATION;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SearchTest extends BaseTestCase {
 
-    private static final String CAREER_PAGE_URL = "https://akamaijobs.referrals.selectminds.com";
     private static final String KEYWORD = "test";
-    private static final String LOCATION = "Krakow, Poland";
+    private static final String JOB_LOCATION = "Krakow, Poland";
     private static final int RESULTS_NUMBER = 12;
     private static final String JOB_POST_TITLE = "Software Development Engineer in Test";
     private static final int JOB_POST_NUMBER = 2;
@@ -18,9 +18,9 @@ public class SearchTest extends BaseTestCase {
     @Test
     public void shouldSearchJobPostByKeywordAndLocation() {
 
-        CareersPage careersPage = new CareersPage(driver, CAREER_PAGE_URL).open();
+        CareersPage careersPage = new CareersPage(driver, CONFIGURATION.getValue("baseUrl")).open();
 
-        SearchResultPage searchResultPage = careersPage.findJobPost(KEYWORD, LOCATION);
+        SearchResultPage searchResultPage = careersPage.findJobPost(KEYWORD, JOB_LOCATION);
 
         assertThat(searchResultPage.getTotalResults()).isEqualTo(RESULTS_NUMBER);
         assertThat(searchResultPage.getJobPostNumber(JOB_POST_TITLE)).isEqualTo(JOB_POST_NUMBER);

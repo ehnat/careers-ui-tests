@@ -1,5 +1,6 @@
 package com.akamai;
 
+import com.akamai.configuration.OperatingSystem;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -10,14 +11,15 @@ public abstract class BaseTestCase {
     WebDriver driver;
 
     @BeforeMethod
-    public void openBrowser() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+    public void openChromeBrowser() {
+        System.setProperty("webdriver.chrome.driver", OperatingSystem.valueOf(System.getProperty("operatingSystem"))
+                .getChromeDriverPath());
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
 
     @AfterMethod
-    public void closeBrowser() throws Exception {
+    public void closeBrowser() {
         driver.quit();
     }
 }

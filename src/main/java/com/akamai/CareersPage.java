@@ -30,6 +30,7 @@ class CareersPage extends BasePage {
 
     CareersPage open() {
         driver.get(url);
+        waitForWebElementVisibility(keywordInput);
         return this;
     }
 

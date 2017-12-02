@@ -13,11 +13,11 @@ class BasePage {
 
     BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 45);
+        this.wait = new WebDriverWait(driver,30);
         PageFactory.initElements(driver, this);
     }
 
-    void waitForVisibilityWebElement(WebElement webElement) {
+    void waitForWebElementVisibility(WebElement webElement) {
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 }

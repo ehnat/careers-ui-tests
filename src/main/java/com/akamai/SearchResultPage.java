@@ -18,15 +18,14 @@ class SearchResultPage extends BasePage {
 
     SearchResultPage(WebDriver driver) {
         super(driver);
+        waitForWebElementVisibility(totalResults);
     }
 
     int getTotalResults() {
-        waitForVisibilityWebElement(totalResults);
         return Integer.parseInt(totalResults.getText());
     }
 
     int getJobPostNumber(String title) {
-        waitForVisibilityWebElement(jobTitles.get(0));
         return (int) jobTitles.stream()
                 .filter(jobTitle -> jobTitle.getText().contains(title))
                 .count();
@@ -34,7 +33,7 @@ class SearchResultPage extends BasePage {
 
     JobPostPage goToJobPost(String title) {
         WebElement jobPostTitle = findJobTitle(title)
-                .orElseThrow(() -> new NoSuchElementException(String.format("Job post with title %s doesn't exists", title)));
+                .orElseThrow(() -> new NoSuchElementException(String.format("Job post with title %s doesn't exist", title)));
         jobPostTitle.click();
         return new JobPostPage(driver);
     }

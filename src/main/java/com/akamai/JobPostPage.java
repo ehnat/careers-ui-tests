@@ -11,10 +11,10 @@ class JobPostPage extends BasePage {
 
     JobPostPage(WebDriver driver) {
         super(driver);
+        waitForWebElementVisibility(creationDate);
     }
 
     String getCreationDate() {
-        waitForVisibilityWebElement(creationDate);
         return creationDate.getText();
     }
 }
